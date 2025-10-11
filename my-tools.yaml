@@ -1,0 +1,72 @@
+tools:
+  web-scraper:
+    description: Fetch a webpage and convert it to clean, readable text
+    execution:
+      command: curl -s '<<url>>' | lynx -dump -stdin
+    parameters:
+      url:
+        description: URL of the webpage to fetch
+        required: true
+
+  find-large-files:
+    description: Find files larger than specified size in a directory
+    execution:
+      command: find '<<directory>>' -type f -size +<<size>> -exec ls -lh {} \;
+    parameters:
+      directory:
+        description: Directory to search
+        required: true
+      size:
+        description: Minimum file size (e.g., 100M, 1G)
+        required: true
+
+prompts:
+  summarize-webpage:
+    description: Generate a structured summary of webpage content
+    template: |
+      Please analyze the following webpage content and provide:
+
+      1. **Main Topic**: What is this page about?
+      2. **Key Points**: {{num_points}} most important points
+      3. **Target Audience**: Who is this content for?
+      {{#if focus}}4. **{{focus}} Analysis**: Specific insights about {{focus}}{{/if}}
+
+      Content:
+      {{content}}
+    arguments:
+      content:
+        description: Webpage content to summarize
+        required: true
+      num_points:
+        description: Number of key points to extract (default 5)
+        required: false
+      focus:
+        description: Specific aspect to focus on (e.g., technical, business, educational)
+        required: false
+
+  file-analysis:
+    description: Analyze files for specific purposes
+    template: |
+      Analyze the following files for {{analysis_type}}:
+
+      {{#if criteria}}Focus on: {{criteria}}{{/if}}
+
+      {{files}}
+
+      Please provide:
+      - Summary of findings
+      - Recommendations
+      - {{#if format}}Output in {{format}} format{{/if}}
+    arguments:
+      files:
+        description: File contents or paths to analyze
+        required: true
+      analysis_type:
+        description: Type of analysis (security, performance, quality, etc.)
+        required: true
+      criteria:
+        description: Specific criteria or standards to check against
+        required: false
+      format:
+        description: Output format (markdown, JSON, report, etc.)
+        required: false
