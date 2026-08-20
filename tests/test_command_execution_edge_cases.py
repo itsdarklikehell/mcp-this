@@ -30,7 +30,7 @@ class TestCommandExecutionEdgeCases:
     async def test_execute_with_timeout(self):
         """Test executing a command that takes too long."""
         # Create a command that sleeps for 5 seconds
-        with patch('asyncio.create_subprocess_shell') as mock_create_subprocess:
+        with patch('asyncio.create_subprocess_exec') as mock_create_subprocess:
             # Setup mock process
             mock_process = MagicMock()
             mock_process.communicate.side_effect = TimeoutError()

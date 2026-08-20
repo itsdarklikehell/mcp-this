@@ -1,3 +1,4 @@
+import sys
 """Unit tests for the editing tools."""
 import pytest
 import aiofiles
@@ -12,7 +13,7 @@ from mcp.client.stdio import stdio_client
 def server_params() -> StdioServerParameters:
     """Create server parameters with default configuration."""
     return StdioServerParameters(
-        command="python",
+        command=sys.executable,
         args=["-m", "mcp_this", "--preset", "editing"],
     )
 

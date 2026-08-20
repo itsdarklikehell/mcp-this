@@ -1,3 +1,4 @@
+import sys
 """Unit tests for the GitHub configuration tools."""
 import os
 import pytest
@@ -11,7 +12,7 @@ import tempfile
 def server_params() -> StdioServerParameters:
     """Create server parameters with GitHub configuration."""
     return StdioServerParameters(
-        command="python",
+        command=sys.executable,
         args=["-m", "mcp_this", "--preset", "github"],
     )
 

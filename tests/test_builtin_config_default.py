@@ -1,4 +1,5 @@
 """Unit tests for the default configuration tools."""
+import sys
 import pytest
 import tempfile
 import os
@@ -13,7 +14,7 @@ from mcp.client.stdio import stdio_client
 def server_params() -> StdioServerParameters:
     """Create server parameters with default configuration."""
     return StdioServerParameters(
-        command="python",
+        command=sys.executable,
         args=["-m", "mcp_this"],  # No need to specify config path for default config
     )
 
@@ -2010,7 +2011,7 @@ class TestWebScraper:
             # Check for expected content in the output
             # example.com is very stable and should contain these phrases
             assert "Example Domain" in result_text
-            assert "illustrative examples" in result_text
+            assert "documentation examples" in result_text
 
     async def test_with_dump_options(
         self,

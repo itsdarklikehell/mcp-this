@@ -1,3 +1,4 @@
+import sys
 """Unit tests for the MCP server."""
 import pytest
 import os
@@ -39,7 +40,7 @@ def server_params(request: tuple) -> StdioServerParameters:
     """Create server parameters for different config methods."""
     param_name, param_value = request.param
     return StdioServerParameters(
-        command="python",
+        command=sys.executable,
         args=["-m", "mcp_this", param_name, param_value],
     )
 
@@ -87,7 +88,7 @@ class TestMCPServer:
     async def test_server_with_default_tools(self):
         """Test that the server starts with default tools."""
         server_params = StdioServerParameters(
-            command="python",
+            command=sys.executable,
             args=["-m", "mcp_this"],
         )
         async with stdio_client(server_params) as (read, write), ClientSession(read, write) as session:  # noqa: E501
@@ -101,7 +102,7 @@ class TestMCPServer:
         """Test that prompts are properly registered and can be listed."""
         config_path = Path(__file__).parent / "fixtures" / "test_config_with_prompts.yaml"
         server_params = StdioServerParameters(
-            command="python",
+            command=sys.executable,
             args=["-m", "mcp_this", "--config_path", str(config_path)],
         )
         async with stdio_client(server_params) as (read, write), ClientSession(read, write) as session:  # noqa: E501
@@ -116,7 +117,7 @@ class TestMCPServer:
         """Test that a prompt can be retrieved and returns expected content."""
         config_path = Path(__file__).parent / "fixtures" / "test_config_with_prompts.yaml"
         server_params = StdioServerParameters(
-            command="python",
+            command=sys.executable,
             args=["-m", "mcp_this", "--config_path", str(config_path)],
         )
         async with stdio_client(server_params) as (read, write), ClientSession(read, write) as session:  # noqa: E501
@@ -135,7 +136,7 @@ class TestMCPServer:
         """Test getting a prompt template with both required and optional arguments."""
         config_path = Path(__file__).parent / "fixtures" / "test_config_with_prompts.yaml"
         server_params = StdioServerParameters(
-            command="python",
+            command=sys.executable,
             args=["-m", "mcp_this", "--config_path", str(config_path)],
         )
         async with stdio_client(server_params) as (read, write), ClientSession(
@@ -162,7 +163,7 @@ class TestMCPServer:
         """Test getting a prompt template with only required arguments."""
         config_path = Path(__file__).parent / "fixtures" / "test_config_with_prompts.yaml"
         server_params = StdioServerParameters(
-            command="python",
+            command=sys.executable,
             args=["-m", "mcp_this", "--config_path", str(config_path)],
         )
         async with stdio_client(server_params) as (read, write), ClientSession(

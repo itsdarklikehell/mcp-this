@@ -163,7 +163,11 @@ async def execute_command(cmd: str) -> str:
     try:
         print(f"Executing command: {cmd}")
 
-        process = await asyncio.create_subprocess_shell(
+        # Run via bash so that configs may use bash syntax (e.g. [[ =~ ]],
+        # $BASH_REMATCH). /bin/sh on Debian/Ubuntu is dash and rejects such syntax.
+        process = await asyncio.create_subprocess_exec(
+            "bash",
+            "-c",
             cmd,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
