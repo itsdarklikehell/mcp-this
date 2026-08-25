@@ -1,11 +1,11 @@
-import sys
+import sys  # noqa: D100
 """Unit tests for the GitHub configuration tools."""
-import os
-import pytest
-from mcp import ClientSession, StdioServerParameters
-from mcp.client.stdio import stdio_client
-import subprocess
-import tempfile
+import os  # noqa: E402
+import pytest  # noqa: E402
+from mcp import ClientSession, StdioServerParameters  # noqa: E402
+from mcp.client.stdio import stdio_client  # noqa: E402
+import subprocess  # noqa: E402
+import tempfile  # noqa: E402
 
 
 @pytest.fixture
@@ -385,7 +385,7 @@ class GitTestRepo:
 
         # Clean up temporary directory
         if self.temp_dir:
-            import shutil
+            import shutil  # noqa: PLC0415
             shutil.rmtree(self.temp_dir, ignore_errors=True)
 
     def create_file(self, filename: str, content: str) -> str:

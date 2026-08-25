@@ -73,7 +73,7 @@ class TestRegisterParsedTools:
 
         # Assert that mcp.tool was called with the correct arguments
         mock_mcp.tool.assert_called_once()
-        args, kwargs = mock_mcp.tool.call_args
+        args, kwargs = mock_mcp.tool.call_args  # noqa: RUF059
         assert kwargs["name"] == "echo"
         assert kwargs["description"] == tool_info.get_full_description()
 
@@ -151,12 +151,12 @@ class TestRegisterParsedTools:
         assert mock_decorator.call_count == 2
 
         # Check calls for first tool
-        args1, kwargs1 = mock_mcp.tool.call_args_list[0]
+        args1, kwargs1 = mock_mcp.tool.call_args_list[0]  # noqa: RUF059
         assert kwargs1["name"] == "echo"
         assert kwargs1["description"] == tool_info1.get_full_description()
 
         # Check calls for second tool
-        args2, kwargs2 = mock_mcp.tool.call_args_list[1]
+        args2, kwargs2 = mock_mcp.tool.call_args_list[1]  # noqa: RUF059
         assert kwargs2["name"] == "read"
         assert kwargs2["description"] == tool_info2.get_full_description()
 

@@ -1,16 +1,16 @@
-import sys
+import sys  # noqa: D100
 """Unit tests for the MCP server."""
-import pytest
-import os
-import tempfile
-import shutil
-import anyio
-import json
-import yaml
-from pathlib import Path
-from mcp import ClientSession, StdioServerParameters
-from mcp.client.stdio import stdio_client
-from mcp_this.mcp_server import (
+import pytest  # noqa: E402
+import os  # noqa: E402
+import tempfile  # noqa: E402
+import shutil  # noqa: E402
+import anyio  # noqa: E402
+import json  # noqa: E402
+import yaml  # noqa: E402
+from pathlib import Path  # noqa: E402
+from mcp import ClientSession, StdioServerParameters  # noqa: E402
+from mcp.client.stdio import stdio_client  # noqa: E402
+from mcp_this.mcp_server import (  # noqa: E402
     build_command,
     execute_command,
     parse_tools,

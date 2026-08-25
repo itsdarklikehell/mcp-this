@@ -152,7 +152,7 @@ def validate_config(config: dict) -> None:
 
     # Validate prompts section if present
     if 'prompts' in config:
-        from mcp_this.prompts import validate_prompt_config
+        from mcp_this.prompts import validate_prompt_config  # noqa: PLC0415
         if not isinstance(config['prompts'], dict):
             raise ValueError("'prompts' must be a dictionary")
 
@@ -209,7 +209,7 @@ def register_parsed_tools(tools_info: list[ToolInfo]) -> None:
                 description=tool_info.get_full_description(),
             )(handler)
         except Exception:
-            import traceback
+            import traceback  # noqa: PLC0415
             traceback.print_exc()
 
 
@@ -261,7 +261,7 @@ def register_prompts(prompts_info: list[PromptInfo]) -> None:
             handler = create_prompt_handler(prompt_info)
             mcp.prompt(name=prompt_info.name, description=prompt_info.description)(handler)
         except Exception:
-            import traceback
+            import traceback  # noqa: PLC0415
             traceback.print_exc()
 
 

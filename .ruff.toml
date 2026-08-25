@@ -25,3 +25,7 @@ ignore = [
     "N802",  # invalid-function-name
     "PLR0915"  # too many statements
 ]
+"examples/*.ipynb" = [
+    "E501",  # long lines in interactive example notebooks
+    "W291"   # trailing whitespace in notebook cells
+]

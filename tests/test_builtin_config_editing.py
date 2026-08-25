@@ -1,12 +1,12 @@
-import sys
+import sys  # noqa: D100
 """Unit tests for the editing tools."""
-import pytest
-import aiofiles
-import tempfile
-import os
-import shutil
-from mcp import ClientSession, StdioServerParameters
-from mcp.client.stdio import stdio_client
+import pytest  # noqa: E402
+import aiofiles  # noqa: E402
+import tempfile  # noqa: E402
+import os  # noqa: E402
+import shutil  # noqa: E402
+from mcp import ClientSession, StdioServerParameters  # noqa: E402
+from mcp.client.stdio import stdio_client  # noqa: E402
 
 
 @pytest.fixture
@@ -353,7 +353,7 @@ class TestCreateFile:
             assert "File created successfully" in result_text or "created successfully" in result_text  # noqa: E501
 
             # Verify the file exists
-            assert os.path.exists(test_file)
+            assert os.path.exists(test_file)  # noqa: ASYNC240
             # Read file and strip any trailing whitespace/newlines for comparison
             async with aiofiles.open(test_file) as f:
                 content = await f.read()
@@ -393,8 +393,8 @@ class TestCreateFile:
             assert "File created successfully" in result_text or "created successfully" in result_text  # noqa: E501
 
             # Verify the directory and file exist
-            assert os.path.exists(nested_dir)
-            assert os.path.exists(test_file)
+            assert os.path.exists(nested_dir)  # noqa: ASYNC240
+            assert os.path.exists(test_file)  # noqa: ASYNC240
             # Read file and strip any trailing whitespace/newlines for comparison
             async with aiofiles.open(test_file) as f:
                 content = await f.read()
@@ -504,7 +504,7 @@ class TestCreateFile:
             assert 'Error' not in result_text
 
             # Verify file exists and is empty
-            assert os.path.exists(test_file)
+            assert os.path.exists(test_file)  # noqa: ASYNC240
             async with aiofiles.open(test_file) as f:
                 content = await f.read()
                 assert content == ""
@@ -570,8 +570,8 @@ class TestCreateDirectory:
             assert "Directory created successfully" in result_text or "created successfully" in result_text  # noqa: E501
 
             # Verify the directory exists
-            assert os.path.exists(test_dir)
-            assert os.path.isdir(test_dir)
+            assert os.path.exists(test_dir)  # noqa: ASYNC240
+            assert os.path.isdir(test_dir)  # noqa: ASYNC240
 
     async def test_create_nested_directory(
         self,
@@ -604,13 +604,13 @@ class TestCreateDirectory:
             assert "Directory created successfully" in result_text or "created successfully" in result_text  # noqa: E501
 
             # Verify the directory exists
-            assert os.path.exists(nested_dir)
-            assert os.path.isdir(nested_dir)
+            assert os.path.exists(nested_dir)  # noqa: ASYNC240
+            assert os.path.isdir(nested_dir)  # noqa: ASYNC240
 
             # Verify parent directories were also created
             parent_dir = os.path.join(temp_test_directory, "nested", "multi", "level")
-            assert os.path.exists(parent_dir)
-            assert os.path.isdir(parent_dir)
+            assert os.path.exists(parent_dir)  # noqa: ASYNC240
+            assert os.path.isdir(parent_dir)  # noqa: ASYNC240
 
     async def test_create_directory_that_already_exists(
         self,
@@ -649,5 +649,5 @@ class TestCreateDirectory:
             assert "Directory created successfully" in result_text or "created successfully" in result_text  # noqa: E501
 
             # The marker file should still exist
-            assert os.path.exists(marker_file)
+            assert os.path.exists(marker_file)  # noqa: ASYNC240
 

@@ -145,8 +145,8 @@ class TestLoadConfig:
     @patch.dict(os.environ, {}, clear=True)  # Clear environment variables
     def test_load_config_from_default_real_file(self) -> None:
         """Test loading configuration from actual default config file."""
-        import yaml
-        from pathlib import Path
+        import yaml  # noqa: PLC0415
+        from pathlib import Path  # noqa: PLC0415
 
         # Find the actual default.yaml in the package
         package_dir = Path(__file__).parent.parent / "src" / "mcp_this"
@@ -218,7 +218,7 @@ class TestValidateConfig:
     def test_validate_config_tool_execution_not_dict(self):
         """Test validating a tool with execution that's not a dictionary."""
         # Assert that ValueError is raised
-        with pytest.raises(ValueError, match="Execution section in .* must be a dictionary"):
+        with pytest.raises(ValueError, match="Execution section in .* must be a dictionary"):  # noqa: RUF043
             validate_config({
                 "tools": {
                     "test": {
